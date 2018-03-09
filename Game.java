@@ -38,16 +38,16 @@ public class Game
         mordor = new Room("Estás en Mordor y has entregado el anillo");
 
         // Indicaciones 
-        comarca.setExits(frowaith, rhovanion, moria, eriador);
-        frowaith.setExits(null, null, comarca, null);
-        eriador.setExits(lindon, comarca, null, null);
-        lindon.setExits(null, eriador, null, null);
-        rhovanion.setExits(null, comarca, null, null);
-        moria.setExits(comarca, null, rohan, null);
-        rohan.setExits(moria, rhun, gondor, null);
-        gondor.setExits(rohan, mordor, null, null);
-        mordor.setExits(rhun, null, null, gondor);
-        rhun.setExits(null, null, mordor, rohan);
+        comarca.setExits(frowaith, rhovanion, moria, eriador, null);
+        frowaith.setExits(null, null, comarca, null, null);
+        eriador.setExits(lindon, comarca, null, null, null);
+        lindon.setExits(null, eriador, null, null, null);
+        rhovanion.setExits(null, comarca, null, null, null);
+        moria.setExits(comarca, null, rohan, null, null);
+        rohan.setExits(moria, rhun, gondor, null, mordor);
+        gondor.setExits(rohan, mordor, null, null, null);
+        mordor.setExits(rhun, null, null, gondor, null);
+        rhun.setExits(null, null, mordor, rohan, null);
 
         currentRoom = comarca;  // Inicias aquí
     }
@@ -153,7 +153,9 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
-
+        if(direction.equals("southEast")) {
+            nextRoom = currentRoom.southEastExit;
+        }
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -180,12 +182,12 @@ public class Game
     }
 
     /**
-     * Agrupación 
+     * Eliminando duplicidades de código y modificando la cohesión
      * 
      */
 
     private void printLocationInfo () {
-        System.out.println("Frodo está aqui " + currentRoom.getDescription());
+        System.out.println("Frodo está en " + currentRoom.getDescription());
         System.out.print("Camina hacia: ");
         if(currentRoom.northExit != null) {
             System.out.print("north ");
@@ -199,6 +201,9 @@ public class Game
         if(currentRoom.westExit != null) {
             System.out.print("west ");
         }
-        System.out.println();
+        if(currentRoom.southEastExit != null) {
+            System.out.print("southEast ");
+        }
+        System.out.println();        
     }
 }
