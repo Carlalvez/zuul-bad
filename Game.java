@@ -8,7 +8,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -24,7 +24,7 @@ public class Game
     private void createRooms()
     {
         Room frodo, frowaith, eriador, lindon, moria, rohan, rhun, gondor, mordor, comarca, rhovanion;
-      
+
         // Crear Localidades
         comarca = new Room("Ubicación actual de Frodo");
         frowaith = new Room("Frowaith");
@@ -36,7 +36,7 @@ public class Game
         rhun = new Room("Rhun");
         gondor = new Room("Gondor");
         mordor = new Room("Estás en Mordor y has entregado el anillo");
-        
+
         // Indicaciones 
         comarca.setExits(frowaith, rhovanion, moria, eriador);
         frowaith.setExits(null, null, comarca, null);
@@ -61,7 +61,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
@@ -78,21 +78,7 @@ public class Game
         System.out.println();
         System.out.println("Bienvenido al Señor de los Anillos");
         System.out.println("Escribe 'help' si necesitas ayudas");
-        System.out.println("Has llegado a " + currentRoom.getDescription());
-        System.out.print("Exits: ");
-        if(currentRoom.northExit != null) {
-            System.out.print("north ");
-        }
-        if(currentRoom.eastExit != null) {
-            System.out.print("east ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("south ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("west ");
-        }
-        System.out.println();
+        printLocationInfo ();
     }
 
     /**
@@ -173,21 +159,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            System.out.println("You are " + currentRoom.getDescription());
-            System.out.print("Exits: ");
-            if(currentRoom.northExit != null) {
-                System.out.print("north ");
-            }
-            if(currentRoom.eastExit != null) {
-                System.out.print("east ");
-            }
-            if(currentRoom.southExit != null) {
-                System.out.print("south ");
-            }
-            if(currentRoom.westExit != null) {
-                System.out.print("west ");
-            }
-            System.out.println();
+            printLocationInfo ();
         }
     }
 
@@ -205,5 +177,28 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+
+    /**
+     * Agrupación 
+     * 
+     */
+
+    private void printLocationInfo () {
+        System.out.println("Frodo está aqui " + currentRoom.getDescription());
+        System.out.print("Camina hacia: ");
+        if(currentRoom.northExit != null) {
+            System.out.print("north ");
+        }
+        if(currentRoom.eastExit != null) {
+            System.out.print("east ");
+        }
+        if(currentRoom.southExit != null) {
+            System.out.print("south ");
+        }
+        if(currentRoom.westExit != null) {
+            System.out.print("west ");
+        }
+        System.out.println();
     }
 }
