@@ -1,26 +1,16 @@
 /**
- * Class Room - a room in an adventure game.
- *
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
- *
- * A "Room" represents one location in the scenery of the game.  It is 
- * connected to other rooms via exits.  The exits are labelled north, 
- * east, south, west.  For each direction, the room stores a reference
- * to the neighboring room, or null if there is no exit in that direction.
- * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.07.31
+ * @author  Carlitos Alvarez
+ * @version 12/03/2018
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southEastExit;
-    
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room southEastExit;
+
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -39,6 +29,7 @@ public class Room
      * @param east The east east.
      * @param south The south exit.
      * @param west The west exit.
+     * @param west The southEast exit.
      */
     public void setExits(Room north, Room east, Room south, Room west, Room southEast) 
     {
@@ -63,4 +54,57 @@ public class Room
         return description;
     }
 
+    public Room getExit (String direction){
+        Room HabitacionDevolver = null;
+
+        if (direction.equals("north")){
+            HabitacionDevolver = northExit;
+        }
+
+        if (direction.equals("south")){
+            HabitacionDevolver = southExit;
+        }
+
+        if (direction.equals("east")){
+            HabitacionDevolver = eastExit;
+        }
+
+        if (direction.equals("west")){
+            HabitacionDevolver = westExit;
+        }
+
+        if (direction.equals("southEast")){
+            HabitacionDevolver = southEastExit;
+        }
+
+        return HabitacionDevolver;
+    }
+    
+    /**
+       * Return a description of the room's exits.
+       * For example: "Exits: north east west"
+       *
+       * @ return A description of the available exits.
+       */
+    public String getExitString()
+    {
+        String exitsDescription = "";
+
+        if (northExit != null) {
+            exitsDescription += "north ";
+        }
+        if (southExit != null) {
+            exitsDescription += "south ";
+        }
+        if (eastExit != null) {
+            exitsDescription += "east ";
+        }
+        if (westExit != null) {
+            exitsDescription += "west ";
+        }
+        if (southEastExit != null) {
+            exitsDescription += "southEast ";
+        }
+        return exitsDescription;
+    }
 }
