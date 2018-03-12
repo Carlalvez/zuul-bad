@@ -10,6 +10,7 @@ public class Room
     private Room eastExit;
     private Room westExit;
     private Room southEastExit;
+    private Room northEastExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,9 +30,10 @@ public class Room
      * @param east The east east.
      * @param south The south exit.
      * @param west The west exit.
-     * @param west The southEast exit.
+     * @param southEast The southEast exit.
+     * @param northEast The northEast exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west, Room southEast) 
+    public void setExits(Room north, Room east, Room south, Room west, Room southEast, Room northEast) 
     {
         if(north != null)
             northExit = north;
@@ -43,6 +45,9 @@ public class Room
             westExit = west;
         if(southEast != null){
             southEastExit = southEast;
+        }
+        if(northEast != null){
+            northEastExit = northEast;
         }
     }
 
@@ -76,6 +81,10 @@ public class Room
         if (direction.equals("southEast")){
             HabitacionDevolver = southEastExit;
         }
+        
+        if (direction.equals("norhtEast")){
+            HabitacionDevolver = northEastExit;
+        }
 
         return HabitacionDevolver;
     }
@@ -104,6 +113,9 @@ public class Room
         }
         if (southEastExit != null) {
             exitsDescription += "southEast ";
+        }
+        if (northEastExit != null) {
+            exitsDescription += "norhtEast ";
         }
         return exitsDescription;
     }

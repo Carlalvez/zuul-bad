@@ -38,16 +38,16 @@ public class Game
         mordor = new Room("Estás en Mordor y has entregado el anillo");
 
         // Indicaciones 
-        comarca.setExits(frowaith, rhovanion, moria, eriador, null);
-        frowaith.setExits(null, null, comarca, null, null);
-        eriador.setExits(lindon, comarca, null, null, null);
-        lindon.setExits(null, eriador, null, null, null);
-        rhovanion.setExits(null, comarca, null, null, null);
-        moria.setExits(comarca, null, rohan, null, null);
-        rohan.setExits(moria, rhun, gondor, null, mordor);
-        gondor.setExits(rohan, mordor, null, null, null);
-        mordor.setExits(rhun, null, null, gondor, null);
-        rhun.setExits(null, null, mordor, rohan, null);
+        comarca.setExits(frowaith, rhovanion, moria, eriador, null, null);
+        frowaith.setExits(null, null, comarca, null, null, null);
+        eriador.setExits(lindon, comarca, null, null, null, null);
+        lindon.setExits(null, eriador, null, null, null, null);
+        rhovanion.setExits(null, comarca, null, null, null, null);
+        moria.setExits(comarca, null, rohan, null, null, null);
+        rohan.setExits(moria, rhun, gondor, null, mordor, rhovanion);
+        gondor.setExits(rohan, mordor, null, null, null, null);
+        mordor.setExits(rhun, null, null, gondor, null, null);
+        rhun.setExits(null, null, mordor, rohan, null, null);
 
         currentRoom = comarca;  // Inicias aquí
     }
