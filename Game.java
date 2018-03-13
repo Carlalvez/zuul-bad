@@ -192,8 +192,7 @@ public class Game
      * 
      */
     private void printLocationInfo () {
-        System.out.println("Frodo está en " + currentRoom.getDescription());
-        System.out.print(currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
         
         System.out.println();        
     }

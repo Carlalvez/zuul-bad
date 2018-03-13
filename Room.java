@@ -7,7 +7,7 @@ import java.util.Set;
 public class Room 
 {
     private String description;
-        
+
     private HashMap <String, Room> salidas;
     /**
      * Create a room described "description". Initially, it has
@@ -35,25 +35,36 @@ public class Room
     }
 
     public Room getExit (String direction){
-       return salidas.get(direction);
+        return salidas.get(direction);
     }
-    
+
     /**
-       * Return a description of the room's exits.
-       * For example: "Exits: north east west"
-       *
-       * @ return A description of the available exits.
-       */
+     * Return a description of the room's exits.
+     * For example: "Exits: north east west"
+     *
+     * @ return A description of the available exits.
+     */
     public String getExitString()
     {
         Set<String> direcciones = salidas.keySet();
         String salidasDescripciones = "Salidas ";
-        
+
         for (String direccion : direcciones)
         {
             salidasDescripciones += direcciones + " ";
         }
 
         return salidasDescripciones;
+    }
+
+    /**
+     * Return a long description of this room, of the form:
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return A description of the room, including exits.
+     */
+    public String getLongDescription()
+    {
+        return "Estas " + description + ".\n" + getExitString();
     }
 }
