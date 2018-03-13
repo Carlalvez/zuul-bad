@@ -1,5 +1,4 @@
 /**
-
  * @author Carlos Alvarez
  * @version 09/03/2018
  */
@@ -37,18 +36,39 @@ public class Game
         gondor = new Room("Gondor");
         mordor = new Room("Estás en Mordor y has entregado el anillo");
 
-        // Indicaciones 
-        comarca.setExits(frowaith, rhovanion, moria, eriador, null, null);
-        frowaith.setExits(null, null, comarca, null, null, null);
-        eriador.setExits(lindon, comarca, null, null, null, null);
-        lindon.setExits(null, eriador, null, null, null, null);
-        rhovanion.setExits(null, comarca, null, null, null, null);
-        moria.setExits(comarca, null, rohan, null, null, null);
-        rohan.setExits(moria, rhun, gondor, null, mordor, rhovanion);
-        gondor.setExits(rohan, mordor, null, null, null, null);
-        mordor.setExits(rhun, null, null, gondor, null, null);
-        rhun.setExits(null, null, mordor, rohan, null, null);
-
+        // Indicaciones
+        comarca.setExit ("north", frowaith);
+        comarca.setExit ("east", rhovanion);
+        comarca.setExit ("south", moria);
+        comarca.setExit ("west", eriador);
+        
+        frowaith.setExit ("south", comarca);
+        
+        eriador.setExit ("north", lindon);
+        eriador.setExit ("east", comarca);
+        
+        lindon.setExit ("east", eriador);
+        
+        rhovanion.setExit ("east", comarca);
+        
+        moria.setExit ("north", comarca);
+        moria.setExit ("south", rohan);
+        
+        rohan.setExit ("north", moria);
+        rohan.setExit("east", rhun);
+        rohan.setExit ("south", gondor);
+        rohan.setExit ("southEast", mordor);
+        rohan.setExit ("northEast", rhovanion);
+        
+        gondor.setExit ("north", rohan);
+        gondor.setExit ("south", mordor);
+        
+        mordor.setExit  ("north", rhun);
+        mordor.setExit ("west", gondor);
+        
+        rhun.setExit ("south", mordor);
+        rhun.setExit ("west", rohan);
+        
         currentRoom = comarca;  // Inicias aquí
     }
 
