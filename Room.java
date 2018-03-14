@@ -46,12 +46,12 @@ public class Room
      */
     public String getExitString()
     {
-        Set<String> direcciones = salidas.keySet();
+        Set<String> nombreDirecciones = salidas.keySet();
         String salidasDescripciones = "Salidas ";
 
-        for (String direccion : direcciones)
+        for (String direccion : nombreDirecciones)
         {
-            salidasDescripciones += direcciones + " ";
+            salidasDescripciones += direccion + " ";
         }
 
         return salidasDescripciones;

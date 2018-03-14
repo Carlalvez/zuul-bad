@@ -41,34 +41,34 @@ public class Game
         comarca.setExit ("east", rhovanion);
         comarca.setExit ("south", moria);
         comarca.setExit ("west", eriador);
-        
+
         frowaith.setExit ("south", comarca);
-        
+
         eriador.setExit ("north", lindon);
         eriador.setExit ("east", comarca);
-        
+
         lindon.setExit ("east", eriador);
-        
+
         rhovanion.setExit ("east", comarca);
-        
+
         moria.setExit ("north", comarca);
         moria.setExit ("south", rohan);
-        
+
         rohan.setExit ("north", moria);
         rohan.setExit("east", rhun);
         rohan.setExit ("south", gondor);
         rohan.setExit ("southEast", mordor);
         rohan.setExit ("northEast", rhovanion);
-        
+
         gondor.setExit ("north", rohan);
         gondor.setExit ("south", mordor);
-        
+
         mordor.setExit  ("north", rhun);
         mordor.setExit ("west", gondor);
-        
+
         rhun.setExit ("south", mordor);
         rhun.setExit ("west", rohan);
-        
+
         currentRoom = comarca;  // Inicias aquí
     }
 
@@ -97,7 +97,7 @@ public class Game
     {
         System.out.println();
         System.out.println("Bienvenido al Señor de los Anillos");
-        System.out.println("Escribe 'help' si necesitas ayudas");
+        System.out.println("Escribe 'help' si necesitas ayuda");
         printLocationInfo ();
     }
 
@@ -121,6 +121,9 @@ public class Game
         }
         else if (commandWord.equals("go")) {
             goRoom(command);
+        }
+        else if (commandWord.equals("look")) {
+            look();
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
@@ -161,7 +164,7 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
-        
+
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -193,7 +196,13 @@ public class Game
      */
     private void printLocationInfo () {
         System.out.println(currentRoom.getLongDescription());
-        
+
         System.out.println();        
+    }
+
+    private void look() 
+    {
+        System.out.println(currentRoom.getLongDescription());
+
     }
 }
