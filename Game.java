@@ -1,3 +1,4 @@
+import java.util.Stack;
 /**
  * @author Carlos Alvarez
  * @version 09/03/2018
@@ -7,7 +8,8 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Room ultimaRoom;
+    private Stack<Room> roomBack;
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -15,9 +17,9 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        ultimaRoom = null;
+        roomBack = new Stack<>();
     }
-    
+
     /**
      * Create all the rooms and link their exits together.
      */
@@ -69,11 +71,9 @@ public class Game
 
         rhun.setExit ("south", mordor);
         rhun.setExit ("west", rohan);
-        
+
         comarca.addItem ("fuente de piedra",250);
-        comarca.addItem ("Casa de Frodo", 0);
-        comarca.addItem ("Gandalf",75);
-        
+       
         currentRoom = comarca;  // Inicias aquí
     }
 
@@ -140,7 +140,7 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-        
+
         return wantToQuit;
     }
 
@@ -182,7 +182,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            ultimaRoom = currentRoom;
+            roomBack.push(currentRoom);
             currentRoom = nextRoom;
             printLocationInfo ();
         }
@@ -225,12 +225,11 @@ public class Game
         System.out.println("You have eaten now and you are not hungry any more");
 
     }
-    
+
     private void back() 
     {
-        if (ultimaRoom != null){
-            currentRoom = ultimaRoom;
-            ultimaRoom = null;
+        if (!roomBack.empty()) {
+            currentRoom = roomBack.pop();
             printLocationInfo ();
         } 
     }
