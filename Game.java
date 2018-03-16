@@ -25,16 +25,16 @@ public class Game
         Room frodo, frowaith, eriador, lindon, moria, rohan, rhun, gondor, mordor, comarca, rhovanion;
 
         // Crear Localidades
-        comarca = new Room("Ubicación actual de Frodo");
-        frowaith = new Room("Frowaith");
-        rhovanion = new Room ("Rhovanion");
-        eriador = new Room("Eriador");
-        lindon = new Room("Lindon");
-        moria = new Room("Moria");
-        rohan = new Room("Rohan");
-        rhun = new Room("Rhun");
-        gondor = new Room("Gondor");
-        mordor = new Room("Estás en Mordor y has entregado el anillo");
+        comarca = new Room("Ubicación actual de Frodo", new Item ("mesita", 15));
+        frowaith = new Room("Frowaith", new Item ("null", 0));
+        rhovanion = new Room ("Rhovanion", new Item ("null", 0));
+        eriador = new Room("Eriador", new Item ("null", 0));
+        lindon = new Room("Lindon", new Item ("null", 0));
+        moria = new Room("Moria", new Item ("null", 0));
+        rohan = new Room("Rohan", new Item ("null", 0));
+        rhun = new Room("Rhun", new Item ("null", 0));
+        gondor = new Room("Gondor", new Item ("null", 0));
+        mordor = new Room("Estás en Mordor y has entregado el anillo", new Item ("null", 0));
 
         // Indicaciones
         comarca.setExit ("north", frowaith);
