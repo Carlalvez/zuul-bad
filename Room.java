@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
+
 /**
  * @author  Carlitos Alvarez
  * @version 12/03/2018
@@ -9,17 +11,19 @@ public class Room
     private String description;
     private HashMap <String, Room> salidas;
     private Item item;
+    private ArrayList <Item> itemList;
+
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, Item item) 
+    public Room(String description) 
     {
         this.description = description;
         salidas = new HashMap<>();
-        this.item = item;
+        itemList = new ArrayList<>();
     }
 
     public void setExit(String direccion, Room nextRoom)
@@ -48,8 +52,7 @@ public class Room
     public String getExitString()
     {
         Set<String> nombreDirecciones = salidas.keySet();
-        String salidasDescripciones = "Salidas ";
-
+        String salidasDescripciones = "";
         for (String direccion : nombreDirecciones)
         {
             salidasDescripciones += direccion + " ";
@@ -66,6 +69,32 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "Estas " + description + ".\n" + getExitString() + item.getInfo();
+        return "Frodo esta en " + description + ".\n" + "objetos: "+ infoObjHabitacion()+ ".\n" + "Tienes estas posibilidades " + getExitString();
+    }
+
+    /**
+     * Añade más de un objeto 
+     */
+    public void addItem(String itemDescription, int itemWeigh)
+    {
+        Item it= new Item (itemDescription, itemWeigh);
+        itemList.add(it);        
+    }
+    
+    /**
+     * Muestra la informacion de los objetos de cada habitacion
+     * 
+     */
+    public String infoObjHabitacion(){
+        String infoObjHabitacion="";
+        if(itemList.size() <= 0){
+            infoObjHabitacion="No hay objetos en esta ubicacion";
+        } else {
+            for(Item objetoDeLaLista : itemList)
+            {
+                infoObjHabitacion += objetoDeLaLista.getNombre();
+            }
+        }
+        return infoObjHabitacion;
     }
 }

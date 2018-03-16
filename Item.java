@@ -20,7 +20,7 @@ public class Item {
         this.name = nombre;
         this.weigh = peso;
     }
-   
+
     /**
      * Nombre del item.
      * @return Devuelve el nombre del item.
@@ -28,20 +28,28 @@ public class Item {
     public String getNombre() {
         return name;
     }
-
+    
+    /**
+     * Nombre del item.
+     * @return Devuelve el nombre del item.
+     */
+    public void setNombre(String nuevoNombre) {
+        name = nuevoNombre;
+    }
+    
+    /**
+     * Peso del item.
+     * @return Devuelve el peso del item.
+     */
+    public void setWeigh(int nuevoWeigh) {
+        weigh = nuevoWeigh;
+    }
+        
     /**
      * Devuelve el peso del item.
      * @return Devuelve el peso del item.
      */
     public int getItem() {
         return weigh;
-    }
-    
-    /**
-     * Devuelve una cadena con toda la informacion del item.
-     * @return Devuelve una cadena con toda la informacion del item.
-     */
-    public String getInfo() {
-        return name + " " + weigh;
     }
 }
