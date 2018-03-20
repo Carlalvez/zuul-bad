@@ -11,7 +11,7 @@ public class Room
     private String description;
     private HashMap <String, Room> salidas;
     private Item item;
-    private ArrayList <Item> itemList;
+    public ArrayList<Item> itemList;
 
     /**
      * Create a room described "description". Initially, it has
@@ -63,8 +63,9 @@ public class Room
 
     /**
      * Return a long description of this room, of the form:
-     *     You are in the 'name of room'
-     *     Exits: north west southwest
+     *  
+     *  
+     *  Exits: north west southwest
      * @return A description of the room, including exits.
      */
     public String getLongDescription()
@@ -75,10 +76,9 @@ public class Room
     /**
      * Añade más de un objeto 
      */
-    public void addItem(String itemDescription, int itemWeigh)
+    public void addItem(Item itemHabitacion)
     {
-        Item it= new Item (itemDescription, itemWeigh);
-        itemList.add(it);        
+        itemList.add(itemHabitacion);        
     }
     
     /**
@@ -86,13 +86,14 @@ public class Room
      * 
      */
     public String infoObjHabitacion(){
-        String infoObjHabitacion="";
-        if(itemList.size() <= 0){
+         String infoObjHabitacion="";
+        if(itemList.size() <= 0)
+        {
             infoObjHabitacion="No hay objetos en esta ubicacion";
         } else {
             for(Item objetoDeLaLista : itemList)
             {
-                infoObjHabitacion += objetoDeLaLista.getNombre();
+                infoObjHabitacion += objetoDeLaLista.itemInfo() + " - ";
             }
         }
         return infoObjHabitacion;

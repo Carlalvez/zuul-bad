@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.ArrayList;
 /**
  * @author Carlos Alvarez
  * @version 09/03/2018
@@ -9,7 +10,8 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> roomBack;
-
+    private ArrayList <Item> mochila;
+    private int limitePeso;
     /**
      * Create the game and initialise its internal map.
      */
@@ -18,6 +20,8 @@ public class Game
         createRooms();
         parser = new Parser();
         roomBack = new Stack<>();
+        mochila = new ArrayList<>();
+        limitePeso = 30;
     }
 
     /**
@@ -72,8 +76,12 @@ public class Game
         rhun.setExit ("south", mordor);
         rhun.setExit ("west", rohan);
 
-        comarca.addItem ("fuente de piedra",250);
-       
+        Item fuente_de_piedra = new Item("fuente de piedra",250,1);
+        Item abrigo = new Item("abrigo",5,2);
+
+        comarca.addItem (fuente_de_piedra);
+        comarca.addItem (abrigo);
+
         currentRoom = comarca;  // Inicias aquí
     }
 
@@ -92,7 +100,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Gracias por jugar, hasta la vista");
     }
 
     /**
@@ -117,7 +125,7 @@ public class Game
         boolean wantToQuit = false;
 
         if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
+            System.out.println("l");
             return false;
         }
 
@@ -140,7 +148,15 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-
+        else if (commandWord.equals("take")) {
+            take(command);
+        }
+        else if (commandWord.equals("drop")) {
+            drop(command);
+        }
+        else if (commandWord.equals("items")) {
+            items();
+        }
         return wantToQuit;
     }
 
@@ -179,7 +195,7 @@ public class Game
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("No hay ubicación en la dirección que solicitas");
         }
         else {
             roomBack.push(currentRoom);
@@ -196,7 +212,7 @@ public class Game
     private boolean quit(Command command) 
     {
         if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            System.out.println("¿Que deseas quitar?");
             return false;
         }
         else {
@@ -232,5 +248,71 @@ public class Game
             currentRoom = roomBack.pop();
             printLocationInfo ();
         } 
+    }
+
+    private void take(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("¿que item necesitas?");
+            return;
+        }
+
+        int item = Integer.parseInt(command.getSecondWord());
+
+        for (int i=0 ; currentRoom.itemList.size()>i ; i++){
+
+            if (currentRoom.itemList.get(i).id == item) {
+
+                if (currentRoom.itemList.get(i).weigh<=limitePeso) {
+                    mochila.add(currentRoom.itemList.get(i));
+                    currentRoom.itemList.remove(i);
+                    System.out.println ("Objeto recogido");
+                } else {
+                    System.out.println ("Objeto muy pesado");                    
+                }
+                i = currentRoom.itemList.size();
+            }
+        }
+    }
+
+    private void drop(Command command) {
+        
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("¿que necesitas soltar?");
+            return;
+        }
+
+        int item = Integer.parseInt(command.getSecondWord());
+
+        for (int i=0 ; mochila.size()>i ; i++){
+
+            if (mochila.get(i).id == item) {
+
+                currentRoom.itemList.add(mochila.get(i));
+                mochila.remove(i);
+                System.out.println ("Objeto depositado");
+                
+                i = currentRoom.itemList.size();
+            }
+        }
+
+    }
+
+    private void items() 
+    {
+        String infoObjHabitacion="";
+        if(mochila.size() <= 0)
+        {
+            infoObjHabitacion="Frodo no lleva objetos en la mochila";
+        } else {
+            for(Item objetoDeLaLista : mochila)
+            {
+                infoObjHabitacion += objetoDeLaLista.itemInfo() + " - ";
+            }
+        }
+        System.out.print (infoObjHabitacion);
+
     }
 }
