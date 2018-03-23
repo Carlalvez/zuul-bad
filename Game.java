@@ -1,4 +1,4 @@
-import java.util.Stack;
+
 /**
  * @author Carlos Alvarez
  * @version 09/03/2018
@@ -7,23 +7,20 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack<Room> roomBack;
-
+    private Player frodo;   
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
-        createRooms();
         parser = new Parser();
-        roomBack = new Stack<>();
+        frodo = new Player(createRooms());
     }
 
     /**
      * Create all the rooms and link their exits together.
      */
-    private void createRooms()
+    private Room createRooms()
     {
         Room frodo, frowaith, eriador, lindon, moria, rohan, rhun, gondor, mordor, comarca, rhovanion;
 
@@ -73,8 +70,8 @@ public class Game
         rhun.setExit ("west", rohan);
 
         comarca.addItem ("fuente de piedra",250);
-       
-        currentRoom = comarca;  // Inicias aquí
+
+        return comarca;
     }
 
     /**
@@ -92,7 +89,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Gracias por jugar, hasta la vista");
     }
 
     /**
@@ -104,7 +101,8 @@ public class Game
         System.out.println("Bienvenido al Señor de los Anillos");
         System.out.println("Escribe 'help' si necesitas ayuda");
         System.out.println("\n");
-        printLocationInfo ();
+        frodo.look();
+        System.out.println("\n");
     }
 
     /**
@@ -117,7 +115,7 @@ public class Game
         boolean wantToQuit = false;
 
         if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
+            System.out.println("No te he entendido");
             return false;
         }
 
@@ -125,17 +123,17 @@ public class Game
         if (commandWord.equals("help")) {
             printHelp();
         }
-        else if (commandWord.equals("go")) {
-            goRoom(command);
-        }
         else if (commandWord.equals("look")) {
-            look();
-        }
-        else if (commandWord.equals("eat")) {
-            eat();
+            frodo.look();
+        }   
+        else if (commandWord.equals("go")) {
+            frodo.goRoom(command);
         }
         else if (commandWord.equals("back")) {
-            back();
+            frodo.back();
+        }
+        else if (commandWord.equals("eat")) {
+            frodo.eat();
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
@@ -145,7 +143,6 @@ public class Game
     }
 
     // implementations of user commands:
-
     /**
      * Print out some help information.
      * Here we print some stupid, cryptic message and a list of the 
@@ -159,33 +156,6 @@ public class Game
         System.out.println("Your command words are:");
         System.out.println(parser.showCommands());
 
-    }
-
-    /** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            roomBack.push(currentRoom);
-            currentRoom = nextRoom;
-            printLocationInfo ();
-        }
     }
 
     /** 
@@ -204,33 +174,4 @@ public class Game
         }
     }
 
-    /**
-     * Eliminando duplicidades de código y modificando la cohesión
-     * 
-     */
-    private void printLocationInfo () {
-        System.out.println(currentRoom.getLongDescription());
-
-        System.out.println();        
-    }
-
-    private void look() 
-    {
-        System.out.println(currentRoom.getLongDescription());
-
-    }
-
-    private void eat() 
-    {
-        System.out.println("You have eaten now and you are not hungry any more");
-
-    }
-
-    private void back() 
-    {
-        if (!roomBack.empty()) {
-            currentRoom = roomBack.pop();
-            printLocationInfo ();
-        } 
-    }
 }
