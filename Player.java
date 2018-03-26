@@ -13,7 +13,7 @@ public class Player
     private Stack<Room> roomBack;
     private Room currentRoom;
     private ArrayList <Item> mochila;
-
+    int pesoLimite;
     /**
      * Constructor for objects of class Player
      */
@@ -22,6 +22,7 @@ public class Player
         roomBack = new Stack<>();
         currentRoom = comarca;
         mochila = new ArrayList<>();
+        pesoLimite = 30;
     }
 
     /** 
@@ -80,15 +81,19 @@ public class Player
         }
         String item = (command.getSecondWord());
         ArrayList<Item> prueba = currentRoom.itemListA();
-        
+
         for (Item itemFor : prueba)
         {              
             if (itemFor.getNombre().equals (item))
             {
-                System.out.println ("Objeto cogido");
-                mochila.add(itemFor);
-                currentRoom.removeItem(itemFor);
-                break;
+                if (itemFor.getItem() <= pesoLimite){
+                    System.out.println ("Objeto cogido");
+                    mochila.add(itemFor);
+                    currentRoom.removeItem(itemFor);
+                    break;
+                } else {
+                    System.out.print ("Pesa demasiado, no puedo con ese objeto");
+                }
             }
         }        
     }  

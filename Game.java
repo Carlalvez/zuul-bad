@@ -70,6 +70,7 @@ public class Game
         rhun.setExit ("west", rohan);
 
         comarca.addItem ("fuente",250);
+        comarca.addItem ("espada",10);
 
         return comarca;
     }
