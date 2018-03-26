@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.ArrayList;
 /**
  * Implementación clase player incluirá en una primera version.
  * -- currentRoom
@@ -11,16 +12,18 @@ public class Player
 {
     private Stack<Room> roomBack;
     private Room currentRoom;
-    
-     /**
+    private ArrayList <Item> mochila;
+
+    /**
      * Constructor for objects of class Player
      */
     public Player(Room comarca)
     {
         roomBack = new Stack<>();
         currentRoom = comarca;
+        mochila = new ArrayList<>();
     }
-    
+
     /** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
@@ -48,24 +51,45 @@ public class Player
             System.out.println("\n");
         }
     }
-    
+
     public void look() 
     {
         System.out.println(currentRoom.getLongDescription());
 
     }
-    
+
     public void back() 
     {
         if (!roomBack.empty()) {
             currentRoom = roomBack.pop();
         } 
     }
-    
+
     public void eat() 
     {
         System.out.println("You have eaten now and you are not hungry any more");
 
     }   
-    
+
+    public void take(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("¿que item necesitas?");
+            return;
+        }
+        String item = (command.getSecondWord());
+        ArrayList<Item> prueba = currentRoom.itemListA();
+        
+        for (Item itemFor : prueba)
+        {              
+            if (itemFor.getNombre().equals (item))
+            {
+                System.out.println ("Objeto cogido");
+                mochila.add(itemFor);
+                currentRoom.removeItem(itemFor);
+                break;
+            }
+        }        
+    }  
 }

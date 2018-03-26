@@ -9,9 +9,7 @@ public class Item {
     String name;
     // Variable peso
     int weigh;
-    // Variable identificador del objeto.
-    int id;
-
+   
     /**
      * Constructor de objetos Item
      * 

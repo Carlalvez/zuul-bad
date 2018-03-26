@@ -92,9 +92,34 @@ public class Room
         } else {
             for(Item objetoDeLaLista : itemList)
             {
-                infoObjHabitacion += objetoDeLaLista.getNombre();
+                infoObjHabitacion += objetoDeLaLista.getNombre() + " - " + objetoDeLaLista.getItem() + " kgs, ";
             }
         }
         return infoObjHabitacion;
     }
+    
+    /**
+     * @Return ArrayList de itemList
+     */
+    
+    public ArrayList<Item> itemListA() 
+    {
+          return itemList;
+    }
+    
+    /**
+     * Borra objetos de la sala
+     */
+    public void removeItem(Item quitar)
+    {
+        itemList.remove(quitar);
+    }
+    
+    /**
+     * Añade más de un objeto
+     */
+    public void addItem(Item add)
+    {
+        itemList.add(add);        
+    }    
 }
