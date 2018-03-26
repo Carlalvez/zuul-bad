@@ -9,6 +9,8 @@ public class Item {
     String name;
     // Variable peso
     int weigh;
+    // Boleano "si es true lo coge"
+    boolean movible;
     
     /**
      * Constructor de objetos Item
@@ -16,11 +18,12 @@ public class Item {
      * @param nombre nombre de objeto 
      * @param peso peso de objeto
      */
-    public Item(String nombre, int peso) {
+    public Item(String nombre, int peso, boolean isMovible) {
         this.name = nombre;
         this.weigh = peso;
+        this.movible = isMovible;
     }
-
+    
     /**
      * Nombre del item.
      * @return Devuelve el nombre del item.
@@ -51,5 +54,12 @@ public class Item {
      */
     public int getItem() {
         return weigh;
+    }
+    
+    /**
+     *  Boolean true es movible.
+     */
+    public void setMovible(boolean isMovible) {
+        movible = isMovible;
     }
 }

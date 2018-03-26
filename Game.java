@@ -69,8 +69,9 @@ public class Game
         rhun.setExit ("south", mordor);
         rhun.setExit ("west", rohan);
 
-        comarca.addItem ("fuente",250);
-        comarca.addItem ("espada",10);
+        comarca.addItem ("fuente",250,false);
+        comarca.addItem ("espada",10,true);
+        
 
         return comarca;
     }

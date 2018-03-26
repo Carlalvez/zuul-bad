@@ -75,9 +75,9 @@ public class Room
     /**
      * Añade más de un objeto 
      */
-    public void addItem(String itemDescription, int itemWeigh)
+    public void addItem(String itemDescription, int itemWeigh, boolean isMovible)
     {
-        Item it= new Item (itemDescription, itemWeigh);
+        Item it= new Item (itemDescription, itemWeigh, isMovible);
         itemList.add(it);        
     }
     

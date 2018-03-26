@@ -86,14 +86,21 @@ public class Player
         {              
             if (itemFor.getNombre().equals (item))
             {
-                if (itemFor.getItem() <= pesoLimite){
-                    System.out.println("Objeto cogido");
-                    mochila.add(itemFor);
-                    currentRoom.removeItem(itemFor);
-                    break;
-                } else {
-                    System.out.println("Pesa demasiado, no puedo con ese objeto");
+
+                if(itemFor.movible){
+                    if (itemFor.getItem() <= pesoLimite){
+                        System.out.println("Objeto cogido");
+                        mochila.add(itemFor);
+                        currentRoom.removeItem(itemFor);
+                        
+                    } else {
+                        System.out.println("Pesa demasiado, no puedo con ese objeto");
+                    }
+                } 
+                else {
+                    System.out.println ("No se puede mover");
                 }
+                break;
             }
         }        
     } 
