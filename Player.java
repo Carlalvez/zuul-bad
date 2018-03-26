@@ -96,5 +96,20 @@ public class Player
                 }
             }
         }        
-    }  
+    } 
+
+    /**
+     * Objetos que Frodo lleva encima.
+     */
+    public void inventarioMochila()
+    {
+        if (mochila.size() == 0){
+            System.out.println ("la mochila está vacia");
+        } else{
+            for (Item itemFor : mochila)
+            {  
+                System.out.println(itemFor.getNombre() + "-" + itemFor.getItem() + "kgs.");
+            } 
+        }
+    }
 }
