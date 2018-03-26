@@ -9,7 +9,7 @@ public class Item {
     String name;
     // Variable peso
     int weigh;
-   
+    
     /**
      * Constructor de objetos Item
      * 

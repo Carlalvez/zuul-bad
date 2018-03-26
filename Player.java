@@ -87,12 +87,12 @@ public class Player
             if (itemFor.getNombre().equals (item))
             {
                 if (itemFor.getItem() <= pesoLimite){
-                    System.out.println ("Objeto cogido");
+                    System.out.println("Objeto cogido");
                     mochila.add(itemFor);
                     currentRoom.removeItem(itemFor);
                     break;
                 } else {
-                    System.out.print ("Pesa demasiado, no puedo con ese objeto");
+                    System.out.println("Pesa demasiado, no puedo con ese objeto");
                 }
             }
         }        
@@ -112,4 +112,25 @@ public class Player
             } 
         }
     }
+
+    public void drop(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("¿que item necesitas?");
+            return;
+        }
+        String item = (command.getSecondWord());
+
+        for (Item itemFor : mochila)
+        {              
+            if (itemFor.getNombre().equals (item))
+            {
+                System.out.println ("Objeto depositado");
+                mochila.remove(itemFor);
+                currentRoom.addItem(itemFor);
+                break;
+            } 
+        }
+    }        
 }

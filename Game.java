@@ -139,12 +139,15 @@ public class Game
         else if (commandWord.equals("take")){
             frodo.take(command);
         }   
-        else if (commandWord.equals("mochila")){
+        else if (commandWord.equals("items")){
             frodo.inventarioMochila();
         }   
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
+        else if (commandWord.equals("drop")){
+            frodo.drop(command);
+        }  
 
         return wantToQuit;
     }
