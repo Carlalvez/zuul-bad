@@ -69,7 +69,9 @@ public class Game
         rhun.setExit ("south", mordor);
         rhun.setExit ("west", rohan);
 
-        comarca.addItem ("fuente de piedra",250);
+        comarca.addItem ("fuente",250,false);
+        comarca.addItem ("espada",10,true);
+        
 
         return comarca;
     }
@@ -135,9 +137,18 @@ public class Game
         else if (commandWord.equals("eat")) {
             frodo.eat();
         }
+        else if (commandWord.equals("take")){
+            frodo.take(command);
+        }   
+        else if (commandWord.equals("items")){
+            frodo.inventarioMochila();
+        }   
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
+        else if (commandWord.equals("drop")){
+            frodo.drop(command);
+        }  
 
         return wantToQuit;
     }
