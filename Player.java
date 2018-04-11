@@ -92,7 +92,7 @@ public class Player
                         System.out.println("Objeto cogido");
                         mochila.add(itemFor);
                         currentRoom.removeItem(itemFor);
-                        
+
                     } else {
                         System.out.println("Pesa demasiado, no puedo con ese objeto");
                     }
@@ -139,5 +139,52 @@ public class Player
                 break;
             } 
         }
-    }        
+    }
+
+    /** 
+     * Método que permite a la espada ser usada o no contra el monstruo. 
+     * 
+     */
+    public boolean sting(Command command) 
+    {
+        boolean sting = false; 
+        for (Item itemFor : mochila)
+        {              
+            if (itemFor.getNombre().equals ("Sting"))
+            {
+                sting = true;  
+                System.out.println ("tiene espada");
+
+            } else {
+                System.out.println ("no tiene espada");
+            }
+        } 
+        return sting;
+    }
+
+    /** 
+     * Método que permite enfrentamiento con el Balrog
+     * 
+     */
+    public void fight(Command command) 
+    {   ArrayList<Item> prueba = currentRoom.itemListA();
+
+        boolean borradoObjeto = true;
+        int i = 0;
+        while (borradoObjeto == true && i<prueba.size ()){
+            Item objetoActual = prueba.get(i);
+            if (objetoActual.getNombre().equals("Balrog")){
+                if (sting(command) == true)
+                {   
+                    System.out.println ("Has conseguido matar al monstruo");
+
+                    currentRoom.removeItem("Balrog");
+
+                } else {
+                    System.out.println ("Has muerto");
+                }
+            }
+            i++;
+        }
+    }
 }

@@ -70,9 +70,10 @@ public class Game
         rhun.setExit ("west", rohan);
 
         comarca.addItem ("fuente",250,false);
-        comarca.addItem ("espada",10,true);
+        comarca.addItem ("Sting",10,true);
         
-
+        moria.addItem ("Balrog",1500,false);
+        
         return comarca;
     }
 
@@ -149,6 +150,9 @@ public class Game
         else if (commandWord.equals("drop")){
             frodo.drop(command);
         }  
+        else if (commandWord.equals("fight")){
+            frodo.fight(command);
+        }  
 
         return wantToQuit;
     }
@@ -184,5 +188,5 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-
+    
 }

@@ -80,7 +80,7 @@ public class Room
         Item it= new Item (itemDescription, itemWeigh, isMovible);
         itemList.add(it);        
     }
-    
+
     /**
      * Muestra la informacion de los objetos de cada habitacion
      * 
@@ -97,22 +97,30 @@ public class Room
         }
         return infoObjHabitacion;
     }
-    
+
     /**
      * @Return ArrayList de itemList
      */
-    
+
     public ArrayList<Item> itemListA() 
     {
-          return itemList;
+        return itemList;
     }
-    
+
     /**
      * Borra objetos de la sala
      */
-    public void removeItem(Item quitar)
+    public void removeItem(String objetoSala)
     {
-        itemList.remove(quitar);
+        boolean borradoObjeto = true;
+        int i = 0;
+        while (borradoObjeto == true && i<itemList.size ()){
+            Item objetoActual = itemList.get(i);
+            if (objetoSala.equals(objetoActual.getNombre())){
+                itemList.remove(objetoActual);
+            }
+            i++;
+        }
     }
     
     /**
@@ -121,5 +129,13 @@ public class Room
     public void addItem(Item add)
     {
         itemList.add(add);        
-    }    
+    } 
+    
+    /**
+     * Borra objetos de la sala
+     */
+    public void removeItem(Item objetoABorrar)
+    {
+        itemList.remove(objetoABorrar);
+    }
 }
