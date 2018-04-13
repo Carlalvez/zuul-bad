@@ -71,9 +71,9 @@ public class Game
 
         comarca.addItem ("fuente",250,false);
         comarca.addItem ("Sting",10,true);
-        
+
         moria.addItem ("Balrog",1500,false);
-        
+
         return comarca;
     }
 
@@ -116,44 +116,53 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
+        CommandWord commandWord = command.getCommandWord();
+        switch (commandWord){
+            case UNKNOWN:
+            System.out.println ("No te he entendido");
+            break;
 
-        if(command.isUnknown()) {
-            System.out.println("No te he entendido");
-            return false;
-        }
-
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
+            case HELP:
             printHelp();
-        }
-        else if (commandWord.equals("look")) {
-            frodo.look();
-        }   
-        else if (commandWord.equals("go")) {
-            frodo.goRoom(command);
-        }
-        else if (commandWord.equals("back")) {
-            frodo.back();
-        }
-        else if (commandWord.equals("eat")) {
-            frodo.eat();
-        }
-        else if (commandWord.equals("take")){
-            frodo.take(command);
-        }   
-        else if (commandWord.equals("items")){
-            frodo.inventarioMochila();
-        }   
-        else if (commandWord.equals("quit")) {
-            wantToQuit = quit(command);
-        }
-        else if (commandWord.equals("drop")){
-            frodo.drop(command);
-        }  
-        else if (commandWord.equals("fight")){
-            frodo.fight(command);
-        }  
+            break;
 
+            case LOOK:
+            frodo.look();
+            break;
+
+            case GO:
+            frodo.goRoom(command);
+            break;
+
+            case BACK:
+            frodo.back();
+            break;
+
+            case EAT:
+            frodo.eat();
+            break;
+
+            case TAKE:
+            frodo.take(command);
+            break;
+
+            case ITEMS:
+            frodo.inventarioMochila();
+            break;
+
+            case QUIT:
+            wantToQuit = quit(command);
+            break;
+
+            case DROP:
+            frodo.drop(command);
+            break;
+
+            case FIGHT:
+            frodo.fight(command);
+            break;
+        }
+        
         return wantToQuit;
     }
 
@@ -165,10 +174,9 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("Estas perdido eh...");
         System.out.println();
-        System.out.println("Your command words are:");
+        System.out.println("Tu comando es: ");
         System.out.println(parser.showCommands());
 
     }
@@ -181,12 +189,12 @@ public class Game
     private boolean quit(Command command) 
     {
         if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            System.out.println("¿Que deseas quitar?");
             return false;
         }
         else {
             return true;  // signal that we want to quit
         }
     }
-    
+
 }

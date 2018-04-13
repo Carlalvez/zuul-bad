@@ -153,10 +153,10 @@ public class Player
             if (itemFor.getNombre().equals ("Sting"))
             {
                 sting = true;  
-                System.out.println ("tiene espada");
+                System.out.println ("Tiene espada");
 
             } else {
-                System.out.println ("no tiene espada");
+                System.out.println ("No tiene espada");
             }
         } 
         return sting;
